@@ -49,6 +49,31 @@ df = dataset['train'].to_pandas()
 df['job_posted_date'] = pd.to_datetime(df['job_posted_date'])
 df['job_skills'] = df['job_skills'].apply(lambda x: ast.literal_eval(x) if pd.notna(x) else x)
 ```
+# The Analysis
+
+Each Jupyter notebook for this project aimed at investigating specific aspects of the data job market. Here’s how I approached each question:
+
+## Exploratory Data Analysis
+
+Before moving into the main skill and salary analysis, I explored the U.S. Data Analyst job postings to get a clearer picture of the dataset and the types of opportunities it contains.
+
+I filtered the dataset to Data Analyst roles in the United States and looked at several basic characteristics of the job postings:
+
+- The most common job locations
+- The companies with the most Data Analyst job postings
+- Job schedule types such as full-time, contract, part-time, internship and temporary work
+- The proportion of postings offering work-from-home options
+- Whether a degree was mentioned in the posting
+- Whether health insurance was offered
+
+This initial exploration helped me understand the structure of the Data Analyst job market represented in the dataset before moving on to the more detailed skill, salary and trend analysis.
+
+View the exploratory notebook here: [1_EDA_intro](0_EDA_intro.ipynb).
+
+I first explored the U.S. Data Analyst job postings to understand their locations, employers, schedule types and several job characteristics.
+
+[![Top 10 Job Locations for US Data Analysts](images/EDA_job_locations.png)](0_EDA_intro.ipynb)
+
 
 ## Filter US Jobs
 
@@ -58,11 +83,6 @@ To focus my analysis on the U.S. job market, I apply filters to the dataset, nar
 df_US = df[df['job_country'] == 'United States']
 
 ```
-
-# The Analysis
-
-Each Jupyter notebook for this project aimed at investigating specific aspects of the data job market. Here’s how I approached each question:
-
 ## 1. What are the most demanded skills for the top 3 most popular data roles?
 
 To find the most demanded skills for the top 3 most popular data roles. I filtered out those positions by which ones were the most popular, and got the top 5 skills for these top 3 roles. This query highlights the most popular job titles and their top skills, showing which skills I should pay attention to depending on the role I'm targeting. 
