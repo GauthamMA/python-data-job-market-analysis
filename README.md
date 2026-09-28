@@ -28,6 +28,66 @@ The analysis focuses primarily on Data Analyst roles in the United States and us
 
 This section outlines the steps taken to prepare the data for analysis, ensuring accuracy and usability.
 
+# How to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/GauthamMA/python-data-job-market-analysis.git
+```
+
+2. Move into the project folder:
+
+```bash
+cd python-data-job-market-analysis
+```
+
+3. Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Download `data_jobs.zip` from the repository's **Releases** section.
+
+5. Extract the archive and place `data_jobs.csv` in the project root directory.
+
+The project folder should then look like this:
+
+```text
+python-data-job-market-analysis/
+│
+├── data_jobs.csv
+├── 0_EDA_intro.ipynb
+├── 1_Skill_Demand.ipynb
+├── 2_skills_trend.ipynb
+├── 3_salary_analysis.ipynb
+├── 4_optimal_skills.ipynb
+├── requirements.txt
+├── README.md
+└── images/
+```
+
+6. Open the project in Jupyter Notebook, JupyterLab, or Visual Studio Code.
+
+7. Run the notebooks in order:
+
+```text
+0_EDA_intro.ipynb
+1_Skill_Demand.ipynb
+2_skills_trend.ipynb
+3_salary_analysis.ipynb
+4_optimal_skills.ipynb
+```
+
+The notebooks load the dataset locally using:
+
+```python
+df = pd.read_csv('data_jobs.csv')
+```
+
+and save generated visualisations to the `images/` folder.
+
 ## Dataset
 
 The dataset used in this project is not stored directly in the repository because of its file size.
