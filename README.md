@@ -50,12 +50,10 @@ I start by importing necessary libraries and loading the dataset, followed by in
 import ast
 import pandas as pd
 import seaborn as sns
-from datasets import load_dataset
 import matplotlib.pyplot as plt  
 
 # Loading Data
-dataset = load_dataset('lukebarousse/data_jobs')
-df = dataset['train'].to_pandas()
+df = pd.read_csv('data_jobs.csv')
 
 # Data Cleanup
 df['job_posted_date'] = pd.to_datetime(df['job_posted_date'])
@@ -101,7 +99,7 @@ I identified the three most common data roles in the U.S. job market and compare
 
 The `job_skills` column was expanded using `explode()` so that each skill could be counted individually. I then grouped the data by skill and job role, calculated the percentage of postings mentioning each skill, and compared the results across the top three roles.
 
-[View the Skill Demand notebook](2_Skill_Demand.ipynb)
+[View the Skill Demand notebook](1_Skill_Demand.ipynb)
 
 ### Visualisation
 
@@ -158,34 +156,53 @@ plt.show()
 
 ## 2. How are in-demand skills trending for Data Analysts?
 
-To find how skills are trending in 2023 for Data Analysts, I filtered data analyst positions and grouped the skills by the month of the job postings. This got me the top 5 skills of data analysts by month, showing how popular skills were throughout 2023.
+I analysed how demand for the five most common Data Analyst skills changed throughout 2023 in the United States.
 
-View my notebook with detailed steps here: [3_Skills_Trend](3_Skills_Trend.ipynb).
+The data was filtered to U.S. Data Analyst roles, and the `job_skills` column was expanded using `explode()`. I then grouped skill occurrences by month and used a pivot table to compare monthly demand across skills.
 
-### Visualize Data
+Because the total number of job postings changes from month to month, raw skill counts were converted into percentages of monthly Data Analyst postings. This makes the trends more comparable across the year.
+
+[View the Skill Trends notebook](2_skills_trend.ipynb)
+
+### Visualisation
 
 ```python
-
 from matplotlib.ticker import PercentFormatter
 
 df_plot = df_DA_US_percent.iloc[:, :5]
-sns.lineplot(data=df_plot, dashes=False, legend='full', palette='tab10')
 
-plt.gca().yaxis.set_major_formatter(PercentFormatter(decimals=0))
+sns.lineplot(
+    data=df_plot,
+    dashes=False,
+    legend='full',
+    palette='tab10'
+)
+
+plt.ylabel('Percentage of Job Postings')
+plt.xlabel('2023')
+
+plt.gca().yaxis.set_major_formatter(
+    PercentFormatter(decimals=0)
+)
 
 plt.show()
 
-```
-
 ### Results
 
-![Trending Top Skills for Data Analysts in the US](images/Trending_Top_Skills_for_Data_Analysts_in_the_US.png)  
-*Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
+![Trending Top Skills for Data Analysts in the US](images\images\2_Trending_Top_Skills_for_Data_Analysts_in_the_US.png)
+ 
+Monthly percentage of U.S. Data Analyst job postings requesting each of the five most commonly requested skills in 2023.
 
-### Insights:
-- SQL remains the most consistently demanded skill throughout the year, although it shows a gradual decrease in demand.
-- Excel experienced a significant increase in demand starting around September, surpassing both Python and Tableau by the end of the year.
-- Both Python and Tableau show relatively stable demand throughout the year with some fluctuations but remain essential skills for data analysts. Power BI, while less demanded compared to the others, shows a slight upward trend towards the year's end.
+
+### Insights
+
+- SQL remained the most frequently requested skill throughout the year, although its share of postings generally declined toward the end of 2023.
+- Excel remained the second most common skill and also declined during the second half of the year before recovering in December.
+- Python and Tableau stayed relatively close in demand across much of the year, with both appearing in roughly a quarter to a third of postings.
+- SAS had the lowest demand among the five skills shown and remained comparatively stable through the year.
+- Converting monthly counts into percentages helps separate changes in skill demand from changes in the overall number of Data Analyst job postings.
+
+
 
 ## 3. How well do jobs and skills pay for Data Analysts?
 
