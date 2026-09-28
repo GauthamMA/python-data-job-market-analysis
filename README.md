@@ -311,7 +311,7 @@ df_DA_skills['skill_percent'] = (
     * 100
 )
 
-min_skill_percent = 5
+skill_limit = 5
 
 df_DA_skills_high_demand = df_DA_skills[
     df_DA_skills['skill_percent'] > min_skill_percent
